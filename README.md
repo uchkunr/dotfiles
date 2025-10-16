@@ -29,4 +29,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-*Maintained by [Uchkun Rakhimov](https://github.com/uchkun)*
+*Maintained by [Uchkun Rakhimov](https://github.com/uchkunrakhimow)*
