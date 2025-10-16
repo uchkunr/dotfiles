@@ -1,0 +1,118 @@
+[cursor]
+style = "Block"
+vi_mode_style.shape = "Block"
+
+[mouse]
+hide_when_typing = false
+
+[font]
+size = 16.0
+
+[font.normal]
+family = "CodeNewRoman Nerd Font"
+
+[window]
+startup_mode = "Windowed"
+dynamic_padding = true
+opacity = 0.8
+blur = true
+decorations = "Buttonless"
+
+[window.padding]
+x = 0
+y = 0
+
+[colors.normal]
+black = "#1b2224"
+red = "#d95468"
+green = "#8bd49c"
+yellow = "#ebbf83"
+blue = "#5ec4ff"
+magenta = "#e27e8d"
+cyan = "#70e1e8"
+white = "#eeeeee"
+
+[colors.bright]
+black = "#ffffff"
+red = "#d95468"
+green = "#8bd49c"
+yellow = "#ebbf83"
+blue = "#5ec4ff"
+magenta = "#e27e8d"
+cyan = "#70e1e8"
+white = "#ffffff"
+
+[colors.primary]
+background = "#0b1416"
+foreground = "#ecf0c1"
+
+[[keyboard.bindings]]
+key = "R"
+mods = "Alt"
+chars = "\u001br"
+
+[[keyboard.bindings]]
+key = "T"
+mods = "Alt"
+chars = "\u001bt"
+
+[[keyboard.bindings]]
+key = "F"
+mods = "Alt"
+chars = "\u001bf"
+
+[[keyboard.bindings]]
+key = "P"
+mods = "Alt"
+chars = "\u001bp"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Alt"
+chars = "\u001bv"
+
+[[keyboard.bindings]]
+key = "A"
+mods = "Alt"
+chars = "\u001ba"
+
+[[keyboard.bindings]]
+key = "S"
+mods = "Alt"
+chars = "\u001bs"
+
+[[keyboard.bindings]]
+key = "D"
+mods = "Alt"
+chars = "\u001bd"
+
+[[keyboard.bindings]]
+key = "Q"
+mods = "Alt"
+chars = "\u001bq"
+
+[[keyboard.bindings]]
+key = "E"
+mods = "Alt"
+chars = "\u001be"
+
+[[keyboard.bindings]]
+key = "W"
+mods = "Alt"
+chars = "\u001bw"
+
+[[keyboard.bindings]]
+key = "G"
+mods = "Alt"
+chars = "\u001bg"
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Alt"
+chars = "\u001bc"
+
+[[keyboard.bindings]]
+key = "X"
+mods = "Alt"
+chars = "\u001bx"
+
