@@ -17,7 +17,10 @@ Personal configuration files for macOS development environment.
 
 ## Setup
 
-Clone and symlink configs to `$HOME`.
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/uchkunr/dotfiles/master/install.sh)"
+```
+
 Secrets go in `~/.secrets` (not tracked).
 
 ## License
