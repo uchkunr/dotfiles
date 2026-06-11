@@ -45,8 +45,35 @@ else
 fi
 
 # Brew bundle
-echo "[5/5] Installing packages from Brewfile..."
+echo "[5/6] Installing packages from Brewfile..."
 brew bundle --file="$DOTFILES/Brewfile"
 
+# Symlinks
+echo "[6/6] Creating symlinks..."
+
+symlink() {
+  local src="$DOTFILES/$1"
+  local dst="$HOME/$1"
+  mkdir -p "$(dirname "$dst")"
+  if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+    mv "$dst" "${dst}.bak"
+    echo "  Backed up existing $(basename "$dst") → $(basename "$dst").bak"
+  fi
+  ln -sf "$src" "$dst"
+  echo "  $1"
+}
+
+symlink ".zshrc"
+symlink ".zprofile"
+symlink ".zshenv"
+symlink ".config/nvim"
+symlink ".config/fish"
+symlink ".config/tmux"
+symlink ".config/alacritty"
+symlink ".config/bat"
+symlink ".config/zed"
+symlink ".config/htop"
+symlink ".config/karabiner"
+
 echo ""
-echo "Done. Symlink your configs manually or restart your terminal."
+echo "Done. Restart your terminal to apply changes."
