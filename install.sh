@@ -1,79 +1,79 @@
 #!/bin/bash
+# Dotfiles installer for macOS and Linux (Debian-based)
 
 set -e
 
-DOTFILES="$HOME/dotfiles"
 REPO="https://github.com/uchkunr/dotfiles"
 
-echo "Starting setup..."
-echo ""
+# OS Detection
+OS="$(uname -s)"
+case "$OS" in
+    Darwin)
+        OS_TYPE="macos"
+        ;;
+    Linux)
+        if command -v apt &>/dev/null; then
+            OS_TYPE="linux"
+        else
+            echo "Error: Only macOS and Debian-based Linux are supported." >&2
+            exit 1
+        fi
+        ;;
+    *)
+        echo "Error: Unsupported OS: $OS" >&2
+        exit 1
+        ;;
+esac
 
-# Homebrew
-if ! command -v brew &>/dev/null; then
-  echo "[1/5] Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+# Resolve Dotfiles Directory
+# If script is run directly from the cloned directory, use it. Otherwise, default to $HOME/dotfiles.
+SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_PATH/Brewfile" ] && [ -d "$SCRIPT_PATH/.config" ]; then
+    DOTFILES_DIR="$SCRIPT_PATH"
 else
-  echo "[1/5] Homebrew already installed, skipping."
+    DOTFILES_DIR="$HOME/dotfiles"
 fi
 
-# Bun
-if ! command -v bun &>/dev/null; then
-  echo "[2/5] Installing Bun..."
-  curl -fsSL https://bun.sh/install | bash
-  export BUN_INSTALL="$HOME/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
-else
-  echo "[2/5] Bun already installed, skipping."
+export DOTFILES_DIR
+
+# Clone / Pull repository if needed
+if [ ! -d "$DOTFILES_DIR" ]; then
+    echo "Cloning dotfiles to $DOTFILES_DIR..."
+    git clone "$REPO" "$DOTFILES_DIR"
+elif [ "$DOTFILES_DIR" = "$HOME/dotfiles" ]; then
+    echo "Updating dotfiles at $DOTFILES_DIR..."
+    git -C "$DOTFILES_DIR" pull
 fi
 
-# Claude Code
-if ! command -v claude &>/dev/null; then
-  echo "[3/5] Installing Claude Code..."
-  curl -fsSL https://claude.ai/install.sh | bash
-else
-  echo "[3/5] Claude Code already installed, skipping."
-fi
+# Ensure all installer scripts have execute permissions
+chmod +x "$DOTFILES_DIR"/install/*.sh
 
-# Clone dotfiles
-if [ ! -d "$DOTFILES" ]; then
-  echo "[4/5] Cloning dotfiles..."
-  git clone "$REPO" "$DOTFILES"
-else
-  echo "[4/5] Dotfiles already cloned, pulling latest..."
-  git -C "$DOTFILES" pull
-fi
+# Load helper utilities
+source "$DOTFILES_DIR/install/utils.sh"
 
-# Brew bundle
-echo "[5/6] Installing packages from Brewfile..."
-brew bundle --file="$DOTFILES/Brewfile"
-
-# Symlinks
-echo "[6/6] Creating symlinks..."
-
-symlink() {
-  local src="$DOTFILES/$1"
-  local dst="$HOME/$1"
-  mkdir -p "$(dirname "$dst")"
-  if [ -e "$dst" ] && [ ! -L "$dst" ]; then
-    mv "$dst" "${dst}.bak"
-    echo "  Backed up existing $(basename "$dst") → $(basename "$dst").bak"
-  fi
-  ln -sf "$src" "$dst"
-  echo "  $1"
+# Clean-up function to terminate background sudo keep-alive process
+cleanup() {
+    if [ -n "$SUDO_PID" ]; then
+        kill "$SUDO_PID" 2>/dev/null || true
+    fi
 }
+trap cleanup EXIT INT TERM
 
-symlink ".zshrc"
-symlink ".zprofile"
-symlink ".zshenv"
-symlink ".config/nvim"
-symlink ".config/fish"
-symlink ".config/tmux"
-symlink ".config/alacritty"
-symlink ".config/bat"
-symlink ".config/zed"
-symlink ".config/htop"
-symlink ".config/karabiner"
+# Run sudo keep-alive for Linux
+if [ "$OS_TYPE" = "linux" ]; then
+    setup_sudo
+fi
+
+# Run OS-Specific Installers
+if [ "$OS_TYPE" = "macos" ]; then
+    bash "$DOTFILES_DIR/install/macos.sh"
+elif [ "$OS_TYPE" = "linux" ]; then
+    bash "$DOTFILES_DIR/install/linux.sh"
+fi
+
+# Run Symlink Configuration
+bash "$DOTFILES_DIR/install/link.sh"
 
 echo ""
-echo "Done. Restart your terminal to apply changes."
+success "Installation completed successfully."
+info "Please restart your shell to apply changes."

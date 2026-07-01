@@ -1,0 +1,28 @@
+# System Utilities
+build-essential
+curl
+wget
+git
+zsh
+tmux
+neovim
+fzf
+ripgrep
+jq
+btop
+tmate
+httpie
+direnv
+flatpak
+
+# Terminal & Shell Addons
+alacritty
+bat
+git-delta
+python3
+python3-pip
+python3-venv
+rsync
+tree
+unzip
+zip

@@ -1,0 +1,22 @@
+# Flatpak Applications List
+
+# OBS Studio for streaming/recording
+com.obsproject.Studio
+
+# Bruno API Client
+com.usebruno.Bruno
+
+# Steam Client
+com.valvesoftware.Steam
+
+# DBeaver Community Database Tool
+io.dbeaver.DBeaverCommunity
+
+# Obsidian Knowledge Base
+md.obsidian.Obsidian
+
+# Prism Launcher for Minecraft
+org.prismlauncher.PrismLauncher
+
+# Telegram Desktop
+org.telegram.desktop
