@@ -79,13 +79,7 @@ else
     info "Bun is already installed."
 fi
 
-# Install Claude Code
-if ! has_cmd claude; then
-    info "Installing Claude Code..."
-    curl -fsSL https://claude.ai/install.sh | bash
-else
-    info "Claude Code is already installed."
-fi
+
 
 # Install Google Chrome
 if ! has_cmd google-chrome && ! has_cmd google-chrome-stable; then

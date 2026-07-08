@@ -87,12 +87,4 @@ cask "warp"
 # Multiplayer code editor
 cask "zed"
 uv "graphifyy"
-npm "@google/gemini-cli"
-npm "@mariozechner/pi-coding-agent"
-npm "@openai/codex"
-npm "corepack"
-npm "fast-ncu"
-npm "npm-check-updates"
-npm "pnpm"
-npm "upify"
-npm "yarn"
+

@@ -74,6 +74,9 @@ fi
 # Run Symlink Configuration
 bash "$DOTFILES_DIR/install/link.sh"
 
+# Run Universal npm Packages Installation
+bash "$DOTFILES_DIR/install/npm.sh"
+
 echo ""
 success "Installation completed successfully."
 info "Please restart your shell to apply changes."
