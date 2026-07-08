@@ -9,6 +9,7 @@ dotfiles/
 ├── install.sh                  # Main installer script
 ├── Brewfile                    # macOS packages
 ├── README.md                   # Main documentation
+├── .bashrc                     # Bash shell configuration
 ├── .config/                    # Tool configurations
 │   ├── alacritty/
 │   ├── bat/
@@ -19,16 +20,17 @@ dotfiles/
     ├── utils.sh                # Helper functions and sudo keep-alive
     ├── macos.sh                # macOS installer
     ├── linux.sh                # Linux installer
-    ├── link.sh                 # Symlink creator
+    ├── link.sh                 # Symlink creator & shell selector
     ├── packages.apt            # List of apt packages for Linux
     └── packages.flatpak        # List of flatpak apps for Linux
 ```
 
 ## Features
 
+- **Interactive Shell Configuration:** Prompts the user to choose between `bash` (which copies `.bashrc`) and `zsh` (which symlinks `.zshrc`, `.zprofile`, `.zshenv`) configuration.
 - **macOS & Linux support:** Detects the operating system automatically and runs the appropriate setup.
 - **Sudo cache:** Prompts for sudo password once on Linux and keeps the token alive for the duration of the run.
-- **Safe linking:** Creates backups (with `.bak` extension) for existing files before symlinking.
+- **Safe linking & copying:** Creates backups (with `.bak` extension) for existing files before symlinking or copying.
 - **Chrome & VS Code:** Automatically downloads and installs the official `.deb` files on Linux.
 
 ## Setup
