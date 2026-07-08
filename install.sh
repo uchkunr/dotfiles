@@ -71,6 +71,10 @@ elif [ "$OS_TYPE" = "linux" ]; then
     bash "$DOTFILES_DIR/install/linux.sh"
 fi
 
+# Run Universal Installers
+bash "$DOTFILES_DIR/install/nvm.sh"
+bash "$DOTFILES_DIR/install/bun.sh"
+
 # Run Symlink Configuration
 bash "$DOTFILES_DIR/install/link.sh"
 

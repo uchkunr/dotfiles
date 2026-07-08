@@ -20,6 +20,9 @@ dotfiles/
     ├── utils.sh                # Helper functions and sudo keep-alive
     ├── macos.sh                # macOS installer
     ├── linux.sh                # Linux installer
+    ├── bun.sh                  # Universal Bun installer
+    ├── nvm.sh                  # Universal NVM & Node.js installer
+    ├── npm.sh                  # Universal npm packages installer
     ├── link.sh                 # Symlink creator & shell selector
     ├── packages.apt            # List of apt packages for Linux
     └── packages.flatpak        # List of flatpak apps for Linux

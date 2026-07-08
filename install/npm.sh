@@ -20,27 +20,9 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh"
 fi
 
-# If npm is still not found, try to install NVM & Node.js automatically
+# Verify if npm is available
 if ! has_cmd npm; then
-    info "Node.js/npm not found. Attempting to install Node Version Manager (NVM)..."
-    
-    # Download and run NVM installer
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-    
-    # Load NVM
-    if [ -s "$NVM_DIR/nvm.sh" ]; then
-        source "$NVM_DIR/nvm.sh"
-        info "Installing Node.js LTS version..."
-        nvm install --lts
-        nvm use --lts
-    else
-        error "Failed to load NVM after installation."
-    fi
-fi
-
-# Re-verify if npm is now available
-if ! has_cmd npm; then
-    error "npm is not installed and NVM setup failed. Skipping global npm packages."
+    error "npm is not installed. Skipping global npm packages installation."
     exit 1
 fi
 

@@ -69,15 +69,7 @@ else
     info "uv is already installed."
 fi
 
-# Install Bun
-if ! has_cmd bun; then
-    info "Installing Bun..."
-    curl -fsSL https://bun.sh/install | bash
-    export BUN_INSTALL="$HOME/.bun"
-    export PATH="$BUN_INSTALL/bin:$PATH"
-else
-    info "Bun is already installed."
-fi
+
 
 
 
